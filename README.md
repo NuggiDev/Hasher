@@ -31,28 +31,49 @@
 
 ### Prerequisites
 
-- Windows ARM64 (Snapdragon X / X Elite)
+- Windows x64 or ARM64
 - [CMake 3.15+](https://cmake.org/download/)
-- [Visual Studio Build Tools 2026](https://visualstudio.microsoft.com/downloads/)
-- [OpenSSL ARM64](https://slproweb.com/products/Win32OpenSSL.html)
+- [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/) (2019 or newer)
+- [OpenSSL](https://slproweb.com/products/Win32OpenSSL.html) — pick the right one for your arch:
+  - **x64**: `Win64 OpenSSL`
+  - **ARM64**: `Win64 ARM OpenSSL`
 
 ### Build from Source
 
-Open the **Visual Studio Developer Command Prompt** for ARM64 and run:
+Open the **Visual Studio Developer Command Prompt** for your architecture and run:
 
 ```cmd
 git clone https://github.com/YOUR_USERNAME/hasher.git
 cd hasher
 mkdir build && cd build
+```
 
-:: Fix missing ARM64 library paths (Windows Insider bug workaround)
-set "LIB=%LIB%;C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\VC\Tools\MSVC\14.52.36418\lib\arm64"
-set "LIB=%LIB%;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\ucrt\arm64"
-set "LIB=%LIB%;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.26100.0\um\arm64"
+#### 🖥️ x64 (Intel / AMD)
+
+```cmd
+:: Initialize x64 environment
+"C:\Program Files (x86)\Microsoft Visual Studio\<version>\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" x64
+
+cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+cmake --build .
+```
+
+#### 💪 ARM64 (Snapdragon / Surface)
+
+```cmd
+:: Initialize ARM64 environment
+"C:\Program Files (x86)\Microsoft Visual Studio\<version>\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" arm64
+
+:: Fix missing lib paths (Windows Insider workaround)
+set "LIB=%LIB%;C:\Program Files (x86)\Microsoft Visual Studio\<version>\BuildTools\VC\Tools\MSVC\<msvc_ver>\lib\arm64"
+set "LIB=%LIB%;C:\Program Files (x86)\Windows Kits\10\Lib\<sdk_ver>\ucrt\arm64"
+set "LIB=%LIB%;C:\Program Files (x86)\Windows Kits\10\Lib\<sdk_ver>\um\arm64"
 
 cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ..
 cmake --build .
 ```
+
+> **Note for ARM64**: BLAKE3 will automatically use **NEON SIMD acceleration** for maximum performance on Snapdragon chips!
 
 ---
 
