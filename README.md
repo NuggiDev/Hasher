@@ -129,6 +129,6 @@ MIT — do whatever you want with it.
 
 <div align="center">
 
-Built with 💀 pain and 🔥 determination on a **Snapdragon X Elite** laptop
+Built with 💀 pain and 🔥 determination on a **Snapdragon X Plus** laptop
 
 </div>
