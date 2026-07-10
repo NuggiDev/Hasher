@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
     }
 
     Hasher hasher;
-    // For default testing, compute all hashes.
+    
     std::vector<Algorithm> algos = {
         Algorithm::SHA1,
         Algorithm::SHA256,

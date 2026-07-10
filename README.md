@@ -40,19 +40,16 @@
 
 ### Build from Source
 
-Open the **Visual Studio Developer Command Prompt** for your architecture and run:
-
 ```cmd
-git clone https://github.com/YOUR_USERNAME/hasher.git
-cd hasher
+git clone https://github.com/NuggiDev/Hasher.git
+cd Hasher
 mkdir build && cd build
 ```
 
 #### 🖥️ x64 (Intel / AMD)
 
 ```cmd
-:: Initialize x64 environment
-"C:\Program Files (x86)\Microsoft Visual Studio\<version>\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" x64
+"C:\Program Files (x86)\Microsoft Visual Studio\<ver>\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" x64
 
 cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 cmake --build .
@@ -61,19 +58,15 @@ cmake --build .
 #### 💪 ARM64 (Snapdragon / Surface)
 
 ```cmd
-:: Initialize ARM64 environment
-"C:\Program Files (x86)\Microsoft Visual Studio\<version>\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" arm64
-
-:: Fix missing lib paths (Windows Insider workaround)
-set "LIB=%LIB%;C:\Program Files (x86)\Microsoft Visual Studio\<version>\BuildTools\VC\Tools\MSVC\<msvc_ver>\lib\arm64"
-set "LIB=%LIB%;C:\Program Files (x86)\Windows Kits\10\Lib\<sdk_ver>\ucrt\arm64"
-set "LIB=%LIB%;C:\Program Files (x86)\Windows Kits\10\Lib\<sdk_ver>\um\arm64"
+"C:\Program Files (x86)\Microsoft Visual Studio\<ver>\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" arm64
 
 cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ..
 cmake --build .
 ```
 
-> **Note for ARM64**: BLAKE3 will automatically use **NEON SIMD acceleration** for maximum performance on Snapdragon chips!
+> **No manual path setup needed!** `CMakeLists.txt` automatically detects and fixes missing MSVC and Windows SDK library paths — even on broken Windows Insider ARM64 builds.
+
+> **NEON Acceleration**: On Snapdragon processors, BLAKE3 automatically uses ARM NEON SIMD intrinsics for maximum throughput!
 
 ---
 

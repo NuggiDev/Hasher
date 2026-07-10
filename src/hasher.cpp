@@ -113,7 +113,7 @@ bool Hasher::verify_hashes(const std::string& hash_file_path) {
     bool all_valid = true;
     
     while (std::getline(hashfile, line)) {
-        // Parse format: "hash filename"
+        
         std::istringstream iss(line);
         std::string expected_hash, filename;
         

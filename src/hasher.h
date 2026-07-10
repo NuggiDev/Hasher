@@ -30,22 +30,22 @@ class Hasher {
 public:
     Hasher();
     
-    // Compute hashes for a file
+    
     HashResult hash_file(const std::string& filepath, 
                         const std::vector<Algorithm>& algos);
     
-    // Compute hashes for multiple files
+    
     std::vector<HashResult> hash_files(const std::vector<std::string>& filepaths,
                                        const std::vector<Algorithm>& algos);
     
-    // Compute hashes recursively for a directory
+    
     std::vector<HashResult> hash_directory(const std::string& dirpath,
                                            const std::vector<Algorithm>& algos);
     
-    // Verify hashes from a file (e.g., .sha256)
+    
     bool verify_hashes(const std::string& hash_file_path);
     
-    // Format results for output
+    
     std::string format_results(const std::vector<HashResult>& results,
                               OutputFormat format);
     
