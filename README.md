@@ -85,6 +85,18 @@ SHA512 (Makefile) = a7d8f23482cfbdf2875456cebca3dd4c4c6b9f722f219dd60b0ad2d3bb56
 BLAKE3 (Makefile) = fc75edaceb374e0cd008d307e59e9d89ea0748386652b02963d36e66bc819c4e
 xxHash64 (Makefile) = 416dce8db7edd9c6
 ```
+## ⚠ Memory Usage
+
+> [!WARNING]
+> **Hasher is optimized for speed, not memory efficiency.**
+>
+> Hasher loads the **entire file into RAM** before hashing it.
+>
+> Memory usage is therefore approximately equal to the size of the file.
+>
+> If you ask it to hash a **100 GB** file on a machine with **16 GB of RAM**...
+>
+> **That's between you and your operating system.**
 
 ---
 
